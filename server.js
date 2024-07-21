@@ -3,10 +3,17 @@ const http = require('http');
 const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+app.use(cors({
+  origin: 'https://dapper-cascaron-ccf8a0.netlify.app',
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
